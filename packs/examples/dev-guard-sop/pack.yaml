@@ -1,0 +1,44 @@
+# OKF v0.1 策略包 —— Team Skill SOP 形态示例。
+# 内容 = PROP-0001 v1.6 §4.3 协同三铁律的转述（经 jiuwen-glue rules.py 代码实现核对）。
+# synthetic：转述内部规格，非提炼自任何厂商真软件（PROP-0002 纪律）。
+api_version: "0.1"
+name: dev-guard-sop
+version: 0.1.0
+targets:
+  - zcode
+  - jiuwen-code
+policies:
+  - id: iron-rules-and-violations
+    path: policies/iron-rules.md
+    description: "dev 团队三铁律及其违规处置"
+prompt_fragments:
+  - id: base
+    path: prompts/base.md
+    slot: system
+    placeholders:
+      - team_name
+  - id: iron-rules
+    path: prompts/iron-rules.md
+    slot: system
+  - id: sop-meta
+    path: prompts/sop-meta.md
+    slot: system
+    targets:
+      - jiuwen-code
+tool_policy:
+  mode: allowlist
+  tools:
+    - read_file
+    - write_file
+    - run_command
+    - web_search
+  notes: "dev 团队 Code 模式默认工具集；写操作须携带 TaskRun 引用（铁律 2 的落地）"
+provenance:
+  source: "PROP-0001 v1.6 §4.3 协同三铁律（转述，与 jiuwen-glue rules.py 的实现语义核对）——synthetic，非提炼自任何厂商真软件"
+  method: "hand-paraphrase from internal spec; no vendor software disassembled"
+  synthetic: true
+license: Apache-2.0
+review:
+  gate_ref: "guardrail://glue/GuardrailRun/GR-EXAMPLE-0002"
+  evidence_ref: "cos://example-bucket/ablation/dev-guard-sop-v0.1.0.json"
+  approved_at: "2026-09-26"

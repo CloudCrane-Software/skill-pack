@@ -1,0 +1,33 @@
+# OKF v0.1 策略包 —— 最小合法示例。
+# synthetic：人工编写，仅演示格式；非提炼自任何厂商真软件（PROP-0002 纪律）。
+api_version: "0.1"
+name: hello-policy
+version: 0.1.0
+targets:
+  - zcode
+  - jiuwen-code
+policies:
+  - id: no-secrets-in-outputs
+    path: policies/no-secrets.md
+    description: "任何输出中不得出现凭据、令牌或密钥"
+prompt_fragments:
+  - id: base
+    path: prompts/base.md
+    slot: system
+    placeholders:
+      - assistant_name
+tool_policy:
+  mode: allowlist
+  tools:
+    - read_file
+    - web_search
+  notes: "最小权限：只读与检索类工具"
+provenance:
+  source: "synthetic example — hand-authored to demonstrate the OKF v0.1 format (WO-0007)"
+  method: "hand-authored; no vendor software disassembled"
+  synthetic: true
+license: Apache-2.0
+review:
+  gate_ref: "guardrail://glue/GuardrailRun/GR-EXAMPLE-0001"
+  evidence_ref: "cos://example-bucket/ablation/hello-policy-v0.1.0.json"
+  approved_at: "2026-09-26"
