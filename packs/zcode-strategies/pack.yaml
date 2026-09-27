@@ -1,0 +1,47 @@
+# OKF v0.1 strategy pack - distilled from the locally installed zcode CLI (non-synthetic).
+api_version: "0.1"
+name: zcode-strategies
+version: 0.1.0
+targets:
+  - zcode
+policies:
+  - id: permission-modes
+    path: policies/permission-modes.md
+    description: "Permission-mode semantics distilled from the zcode runtime permission schema"
+prompt_fragments:
+  - id: base-identity
+    path: prompts/base-identity.md
+    slot: system
+  - id: workflow-actor
+    path: prompts/workflow-actor.md
+    slot: system
+  - id: explore-readonly
+    path: prompts/explore-readonly.md
+    slot: system
+  - id: memory-discipline
+    path: prompts/memory-discipline.md
+    slot: system
+  - id: tool-use
+    path: prompts/tool-use.md
+    slot: system
+tool_policy:
+  mode: allowlist
+  tools:
+    - read
+    - glob
+    - grep
+    - web_fetch
+    - web_search
+    - todo_write
+  notes: "Read-only tools allowed by default; edit/write/bash are permission-gated (build mode pauses for approval before changes). Distilled from the zcode default posture."
+provenance:
+  source: "zcode-app-cli 3.14.3-28 installed at C:/Users/Administrator/AppData/Roaming/npm/node_modules/zcode-app-cli: embedded system-prompt section builders in vendor/zcode.cjs (string offsets 4830184/4831495/4833635/4881853/4893896), subagent prompts and tool descriptions (offsets 7566415-7581500, 5106788/7211396/7224966/7288942), permission-mode schema (offset 1366030), and vendor/packages/bundled-skills/skills/dynamic-workflows/SKILL.md + patterns.md"
+  method: "Node string-offset extraction from the installed runtime bundle, then distillation (paraphrase/generalization, not verbatim copy) into harness-neutral prompt fragments; AI-agent assisted drafting with human spot-check"
+  extracted_at: "2026-09-27"
+  synthetic: false
+  notes: "Fragments are distilled rewrites, not verbatim vendor text; upstream zcode is MIT-licensed. gate_ref currently points to a work-order local verification record; formal GuardrailRun admission and ablation contrast are pending owner process."
+license: Apache-2.0
+review:
+  gate_ref: "guardrail://local/windev-01/wo-D-02/2026-09-27"
+  evidence_ref: "file://packs/zcode-strategies/tests/acceptance.md"
+  approved_at: "2026-09-27"
