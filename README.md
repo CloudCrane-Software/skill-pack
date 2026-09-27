@@ -23,6 +23,7 @@
 | `src/skillpack/_minyaml.py` | OKF 专用严格 YAML 子集解析器——零第三方依赖；不支持的语法显式报错（见 spec §4） |
 | `packs/examples/hello-policy/` | 最小合法 pack（**synthetic**） |
 | `packs/examples/dev-guard-sop/` | Team Skill SOP 形态：dev 团队三铁律提示词包（转述自 PROP-0001 §4.3，**synthetic**；含片段级 targets 过尾示例） |
+| `packs/doubao-harvest/` | 豆包工作客户端收割的 106 个 SKILL.md → jiuwenswarm Harness 格式改造包（**非 synthetic，第三方 material**）：frontmatter 机械映射（`src/skillpack/doubao_convert.py`）+ 4 个重接点语义改写（规则见其 `CONVERSION.md`，源映射 `skill-mapping.md`）；来源与 license 口径见其 `index.md`。未拆包：只含收割的 SKILL.md 主文件，`references/`/`scripts/`/`assets/` 回源补齐 |
 | `tests/` | pytest：校验器正反例（结构 / review 门禁 / 文件存在性 / 占位符契约 / YAML 解析）+ 渲染用例 + CLI 退出码集成测试 |
 
 ## 用法
